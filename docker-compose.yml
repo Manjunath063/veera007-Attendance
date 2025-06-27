@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: attendance_backend_007
+    build: ./Backend
+    ports:
+      - "3057:3057"
+    depends_on:
+      - postgres
+    environment:
+      - PORT=3057
+      - DB_USER=postgres
+      - DB_PASSWORD=admin123
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=attendance_system
+    networks:
+      - attendance_net_007
+
+  frontend:
+    container_name: attendance_frontend_007
+    build: ./Frontend
+    ports:
+      - "8094:80"
+    depends_on:
+      - backend
+    networks:
+      - attendance_net_007
+
+  hr:
+    container_name: attendance_hr_007
+    build: ./HR
+    ports:
+      - "8095:80"
+    depends_on:
+      - backend
+    networks:
+      - attendance_net_007
+
+  postgres:
+    container_name: attendance_postgres_007
+    image: postgres:13
+    ports:
+      - "5457:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=attendance_system
+    volumes:
+      - pgdata_007:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - attendance_net_007
+
+volumes:
+  pgdata_007:
+
+networks:
+  attendance_net_007:
+    driver: bridge
+
