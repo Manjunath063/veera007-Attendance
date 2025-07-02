@@ -22,7 +22,7 @@ services:
     container_name: attendance_frontend_007
     build: ./Frontend
     ports:
-      - "8094:80"
+      - "8140:80"
     depends_on:
       - backend
     networks:
@@ -32,7 +32,7 @@ services:
     container_name: attendance_hr_007
     build: ./HR
     ports:
-      - "8095:80"
+      - "8141:80"
     depends_on:
       - backend
     networks:
