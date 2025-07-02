@@ -391,8 +391,8 @@
             try {
                 const searchTerm = searchInput.value.trim();
                 const url = searchTerm 
-                    ? `http://13.60.31.206:3057/api/attendance?employee_id=${encodeURIComponent(searchTerm)}`
-                    : 'http://13.60.31.206:3057/api/attendance';
+                    ? `http://13.61.194.115:3057/api/attendance?employee_id=${encodeURIComponent(searchTerm)}`
+                    : 'http://13.61.194.115:3057/api/attendance';
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Failed to fetch attendance records');
